@@ -1,15 +1,13 @@
 ## Main
 # main
 snippet main
-	int main(int argc, const char *argv[])
-	{
+	int main(int p_argc, const char** p_argv) {
 		${1}
 		return 0;
 	}
 # main(void)
 snippet mainn
-	int main(void)
-	{
+	int main(void) {
 		${1}
 		return 0;
 	}
@@ -42,17 +40,17 @@ snippet #if
 # header include guard
 snippet once
 	#ifndef ${1:`toupper(Filename('$1_H', 'UNTITLED_H'))`}
-
-	#define $1
+	#define $1 1
 
 	${2}
 
-	#endif /* end of include guard: $1 */
+	#endif
+
 ##
 ## Control Statements
 # if
 snippet if
-	if (${1:/* condition */}) {
+	if(${1:/* condition */}) {
 		${2:/* code */}
 	}${3}
 # else
@@ -62,7 +60,7 @@ snippet el
 	}${3}
 # else if
 snippet elif
-	else if (${1:/* condition */}) {
+	else if(${1:/* condition */}) {
 		${2:/* code */}
 	}${3}
 # ternary
@@ -72,30 +70,29 @@ snippet t
 ## Loops
 # for
 snippet for
-	for (${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+	for(size_t ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
 		${4:/* code */}
 	}${5}
 # for (custom)
 snippet forr
-	for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) {
+	for(size_t ${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) {
 		${5:/* code */}
 	}${6}
 # while
 snippet wh
-	while (${1:/* condition */}) {
+	while(${1:/* condition */}) {
 		${2:/* code */}
 	}${3}
 # do... while
 snippet do
 	do {
 		${2:/* code */}
-	} while (${1:/* condition */});${3}
+	} while(${1:/* condition */});${3}
 ##
 ## Functions
 # function definition
 snippet fun
-	${1:void} ${2:function_name}(${3})
-	{
+	${1:void} ${2:function_name}(${3}) {
 		${4:/* code */}
 	}${5}
 # function declaration
