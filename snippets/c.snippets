@@ -39,7 +39,7 @@ snippet #if
 	#endif
 # header include guard
 snippet once
-	#ifndef ${1:`toupper(Filename('$1_H', 'UNTITLED_H'))`}
+	#ifndef ${1:__`toupper(Filename('$1_H', 'UNTITLED_H'))`__}
 	#define $1 1
 
 	${2}
