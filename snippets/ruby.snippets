@@ -28,6 +28,8 @@ snippet beg
 
 snippet req require
 	require "${1}"${2}
+snippet reqr
+	require_relative "${1}"${2}
 snippet #
 	# =>
 snippet end
@@ -286,8 +288,14 @@ snippet eavd
 snippet eawi
 	each_with_index { |${1:e}, ${2:i}| ${3} }
 snippet eawid
-	each_with_index do |${1:e},${2:i}|
+	each_with_index do |${1:e}, ${2:i}|
 		${3}
+	end
+snippet eawo
+	each_with_object(${1:init}) { |${2:e}, ${3:var}| ${4} }
+snippet eawod
+	each_with_object(${1:init}) do |${2:e}, ${3:var}|
+		${4}
 	end
 snippet reve
 	reverse_each { |${1:e}| ${2} }
@@ -581,6 +589,8 @@ snippet bf
 	before_filter :${1:method}
 snippet bt
 	belongs_to :${1:association}
+snippet btp
+	belongs_to :${1:association}, :polymorphic => true${2}
 snippet crw
 	cattr_accessor :${1:attr_names}
 snippet defcreate
@@ -654,6 +664,10 @@ snippet defupdate
 			end
 		end
 	end${3}
+snippet dele delegate .. to
+	delegate :${1:methods}, :to => :${2:object}
+snippet dele delegate .. to .. prefix .. allow_nil
+	delegate :${1:methods}, :to => :${2:object}, :prefix => :${3:prefix}, :allow_nil => ${4:allow_nil}
 snippet flash
 	flash[:${1:notice}] = "${2}"
 snippet habtm
@@ -878,22 +892,21 @@ snippet mrnc
 	rename_column :${1:table_name}, :${2:old_column_name}, :${3:new_column_name}
 snippet mcc
 	change_column :${1:table}, :${2:column}, :${3:type}
-snippet mccc
-	t.column :${1:title}, :${2:string}
+snippet mnc
+	t.${1:string} :${2:title}${3:, null: false}${4}
 snippet mct
 	create_table :${1:table_name} do |t|
-		t.column :${2:name}, :${3:type}
+		${2}
 	end
-snippet migration
+snippet migration class .. < ActiveRecord::Migration .. def up .. def down .. end
 	class ${1:class_name} < ActiveRecord::Migration
-		def self.up
+		def up
 			${2}
 		end
 
-		def self.down
+		def down
 		end
 	end
-
 snippet trc
 	t.remove :${1:column}
 snippet tre
@@ -901,7 +914,6 @@ snippet tre
 	${3}
 snippet tref
 	t.references :${1:model}
-
 #rspec
 snippet it
 	it "${1:spec_name}" do
@@ -912,6 +924,9 @@ snippet itp
 	${2}
 snippet its
 	its(:${1:method}) { should ${2} }
+snippet itsn
+	its(:${1:method}) { should_not ${2} }
+
 snippet desc
 	describe ${1:class_name} do
 		${2}
@@ -929,8 +944,20 @@ snippet aft
 		${2}
 	end
 snippet let
-	let(:${1:method}) { ${2} }
+	let(:${1:object}) ${2:block}
+snippet let!
+	let!(:${1:object}) ${2:block}
 snippet subj
 	subject { ${1} }
 snippet spec
 	specify { subject.${1} }
+snippet exp
+	expect(${1:object}).to ${2}
+snippet btr
+	be_true
+snippet bfa
+	be_false
+snippet shared
+	shared_examples "${1:shared examples name}" ${2}
+snippet itb
+	it_behaves_like "${1:shared examples name}"${2}
